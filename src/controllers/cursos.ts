@@ -17,5 +17,18 @@ export const getCursos =  async (_req: any, _res: any) => {
     }
 };
 
+export const getCursoById = async (_req: any, _res: any) => {
+    try {
+        const { id } = _req.params;
+        const { data, error } = await supabase.from('cursos').select('*').eq('id', id).single();
 
-3
+        if (error) {
+            return _res.status(400).json({ error: 'Curso no encontrado' });
+        }
+        return _res.status(200).json(data);
+    }
+    catch (error) {
+        console.error('Error al traer el curso:', error);
+        return _res.status(500).json({ error: 'Error al traer el curso' });
+    }
+};
