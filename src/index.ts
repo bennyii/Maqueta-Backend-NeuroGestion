@@ -1,16 +1,14 @@
 import 'dotenv/config';
 import express from 'express';
-import cursosRoutes from './routes/cursos';
+import mainRouter from './routes/mainRouter' 
 
 const app = express();
-
 app.use(express.json());
 
-app.use('/api/cursos', cursosRoutes)
+// Usamos el mainRouter para manejar todas las rutas, para que este mas limpio el index
+app.use(mainRouter);
 
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
-  console.log(`EL SERVER SE ALOJA EN EL PUERTO ${PORT}`);
+  console.log(`🚀 SERVIDOR LISTO EN EL PUERTO ${PORT}`);
 });
-

@@ -5,7 +5,7 @@ import express from 'express';
 
 const router = express.Router();
 
-router.get('/', getCursos);
+router.get('/cursos', getCursos);
 
 
 
