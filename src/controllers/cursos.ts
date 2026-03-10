@@ -114,10 +114,10 @@ export const getModulos = async (_req: any, _res: any) => {
 export const addModuloToCurso = async (_req: any, _res: any) => {
     try {
         const {id_curso} = _req.params;
-        const {titulo, url_contenido, duracion, transcripcion} = _req.body;
+        const {titulo, url_contenido, tipo, duracion, transcripcion} = _req.body;
 
         const {data, error} = await supabase.from('modulos_cursos')
-            .insert({id_curso, titulo, url_contenido, duracion, transcripcion}).select().single();
+            .insert({id_curso, titulo, url_contenido, tipo, duracion, transcripcion}).select().single();
 
         if (error) {
             return _res.status(400).json({error: 'Error al agregar el módulo al curso'});
