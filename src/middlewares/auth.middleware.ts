@@ -58,3 +58,15 @@ export const isAdmin = async (req: AuthRequest, res: Response, next: NextFunctio
         return res.status(500).json({ error: 'Error de autenticación' });
     }
 };
+
+
+//INTERCEPTA LA LLAMADA DE ERP Y VERIFICA SI TRAE EL TOKEN CORRECTO ANTES DE LA BD
+
+export const verifyErpToken = (req: Request, res: Response, next: NextFunction) => {
+    const token = req.headers['x-webhook-token'];
+
+    if (token !== process.env.WEBHOOK_SECRET) {
+        return res.status(401).json({ error: 'Token de ERP inválido' });
+    }
+    next();
+}
